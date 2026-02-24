@@ -1,0 +1,21 @@
+@startuml
+entity "Customer" as cust {
+  * id : INTEGER <<PK>>
+  --
+  name : TEXT
+  email : TEXT
+  company : TEXT
+  created_at : DATETIME
+}
+
+entity "ContactPerson" as contact {
+  * id : INTEGER <<PK>>
+  --
+  customer_id : INTEGER <<FK>>
+  first_name : TEXT
+  last_name : TEXT
+  phone : TEXT
+}
+
+cust ||--o{ contact : "veraltet"
+@enduml

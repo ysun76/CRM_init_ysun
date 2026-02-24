@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor "Sales-Mitarbeiter" as Sales
+participant "Web-Interface (HTML/JS)" as View
+participant "Flask Controller" as Ctrl
+participant "SQLAlchemy Model" as Model
+database "SQLite Database" as DB
+
+Sales -> View : Kundenformular absenden
+View -> Ctrl : POST /add_customer
+activate Ctrl
+Ctrl -> Model : Objekt erstellen & validieren
+activate Model
+Model -> DB : INSERT INTO customers
+activate DB
+DB --> Model : Success
+deactivate DB
+Model --> Ctrl : Validated Object
+deactivate Model
+Ctrl --> View : Redirect zur Kundenliste
+deactivate Ctrl
+View --> Sales : Zeige Erfolgsmeldung
+@enduml

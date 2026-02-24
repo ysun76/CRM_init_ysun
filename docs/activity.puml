@@ -1,0 +1,17 @@
+@startuml
+start
+:Sales-Mitarbeiter öffnet Kundenformular;
+:Eingabe der Kundendaten (Name, Email, Firma);
+if (Daten valide?) then (Ja)
+  :Daten an Flask-Controller senden;
+  :Verarbeitung durch SQLAlchemy;
+  partition "SQLite Extension" {
+    :Daten in lokaler DB speichern;
+  }
+  :Erfolgsmeldung anzeigen;
+else (Nein)
+  :Fehlermeldung anzeigen;
+  :Korrektur der Eingabe;
+endif
+stop
+@enduml
