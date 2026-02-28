@@ -1,4 +1,5 @@
 @startuml
+title CRM-Datenmodell (ER-Diagramm)
 entity "Customer" as cust {
   * id : INTEGER <<PK>>
   --

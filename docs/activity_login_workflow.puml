@@ -1,0 +1,27 @@
+@startuml
+' Titel des Diagramms
+title CRM System - Benutzer-Login-Workflow
+
+start
+
+repeat
+    :Benutzer öffnet die Login-Seite;
+    :Eingabe von Benutzernamen und Passwort;
+    :Klick auf den Button "Anmelden";
+
+    if (Sind die Zugangsdaten korrekt?) then (Ja)
+        :Benutzersitzung (Session) erstellen;
+        
+        ' Flask-Anforderung: Flash Message
+        :Flash-Nachricht generieren: "Willkommen zurück!";
+        
+        :Weiterleitung zum Dashboard;
+        stop
+    else (Nein)
+        :Fehlermeldung generieren: "Ungültige Anmeldedaten";
+        :Flash-Nachricht generieren: "Login fehlgeschlagen", "error";
+    endif
+
+repeat while (Login fehlgeschlagen?) is (Ja)
+
+@enduml

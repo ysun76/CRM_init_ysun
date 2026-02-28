@@ -1,4 +1,6 @@
 @startuml
+title Neue_Kunden_Anlegen (Aktivitätdiagramm)
+
 start
 :Sales-Mitarbeiter öffnet Kundenformular;
 :Eingabe der Kundendaten (Name, Email, Firma);

@@ -1,0 +1,31 @@
+@startuml
+title Benutzer-Login (Sequenzdiagramm)
+
+actor "User" as U
+participant "Browser" as B
+participant "Flask App" as F
+participant "Database (SQLite)" as DB
+
+U -> B: 
+B -> F: POST /login (Daten übertragen)
+activate F
+
+F -> DB:  (SELECT user FROM...)
+activate DB
+DB --> F: 
+deactivate DB
+
+F -> F: 
+
+alt  (Erfolgreich)
+    F -> F: Session
+    F --> B: 302 Redirect (Dashboard) + Flash Message
+else  (Fehlgeschlagen)
+    F --> B: 200 OK (Login-Seite mit Fehler-Flash)
+end
+
+deactivate F
+B --> U: 
+@enduml
+
+@enduml
