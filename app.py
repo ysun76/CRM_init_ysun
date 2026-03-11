@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session 
 # NEU (Sprint 2): Import der Datenbank-Instanz und der persistenten Modelle
 from models import db, Customer, Lead 
+
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-change-this'
@@ -22,22 +23,32 @@ with app.app_context():
         Customer.add_customer('Jane Smith', 'jane@example.com', 'Tech Solutions', '555-0002', 'prospect')
         Lead.add_lead('Alice Brown', 'alice@example.com', 'StartUp Inc', 50000, 'Website')
 
-# --- NEU (Sprint 2): Login-Route gemäß Aktivitätsdiagramm 3.2 ---
+
+ 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Abrufen der Anmeldedaten aus dem Formular
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # Validierung der Zugangsdaten
         if username == 'admin' and password == 'password123':
+            # --- 关键修改：存入登录状态 ---
+            session['logged_in'] = True
+            session['username'] = username  # 可选：存下用户名用于展示
+            # --------------------------
             flash('Erfolgreich eingeloggt!', 'success')
             return redirect(url_for('index'))
         else:
             flash('Ungültige Zugangsdaten!', 'error')
             
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Sie wurden erfolgreich abgemeldet.', 'info')
+    return redirect(url_for('login'))  
 
 @app.route('/')
 def index():
