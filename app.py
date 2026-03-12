@@ -32,16 +32,27 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         
+
         if username == 'admin' and password == 'password123':
-            # --- 关键修改：存入登录状态 ---
             session['logged_in'] = True
-            session['username'] = username  # 可选：存下用户名用于展示
-            # --------------------------
+            session['username'] = 'Admin'
+            session['role'] = 'admin'
+            flash('Willkommen, Admin!', 'success')
+            return redirect(url_for('index'))
+            
+
+        elif username == 'user' and password == 'user123':
+            session['logged_in'] = True
+            session['username'] = 'Test-User'
+            session['role'] = 'user'
             flash('Erfolgreich eingeloggt!', 'success')
             return redirect(url_for('index'))
-        else:
-            flash('Ungültige Zugangsdaten!', 'error')
             
+
+        else:
+            flash('Ungültige Zugangsdaten!', 'danger')
+            return render_template('login.html')
+
     return render_template('login.html')
 
 @app.route('/logout')

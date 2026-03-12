@@ -1,6 +1,6 @@
 @startuml
 ' Titel des Diagramms
-title CRM System - Benutzer-Login-Workflow
+title Benutzer-Login-Workflow(Aktivitätsdiagramm)
 
 start
 

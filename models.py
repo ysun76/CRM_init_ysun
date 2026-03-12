@@ -85,3 +85,9 @@ class Lead(db.Model):
         db.session.add(new_lead)
         db.session.commit()
         return new_lead
+
+    class User(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        username = db.Column(db.String(80), unique=True)
+        password = db.Column(db.String(120))
+        role = db.Column(db.String(20), default='user') # 'admin', 'user', 'guest'
