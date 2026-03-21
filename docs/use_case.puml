@@ -1,0 +1,39 @@
+@startuml
+skinparam actorStyle hollow
+
+' Actors定义
+actor "Registrierter Nutzer" as User
+actor "Administrator" as Admin
+
+rectangle "CRM System (Sprint 3)" {
+    ' Grundfunktionen für alle Nutzer
+    usecase "Login" as UC1
+    usecase "Dashboard ansehen" as UC2
+    usecase "Kundenliste durchsuchen" as UC3
+    usecase "Leadsliste durchsuchen" as UC4
+    usecase "API-Docs (Swagger) ansehen" as UC5
+
+    ' Admin-spezifische Funktionen
+    usecase "Kunde hinzufügen/löschen" as UC6
+    usecase "Lead hinzufügen/löschen" as UC7
+    usecase "Lead in Kunde umwandeln" as UC_Convert
+}
+
+' Verbindungen für den normalen Nutzer
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+User --> UC5
+
+' Admin erbt alle Rechte vom User
+User <|-- Admin
+
+' Zusätzliche Verbindungen nur für Admin
+Admin --> UC6
+Admin --> UC7
+Admin --> UC_Convert
+
+' Kern-Workflow Abhängigkeiten
+UC_Convert ..> UC6 : <<include>>
+@enduml
