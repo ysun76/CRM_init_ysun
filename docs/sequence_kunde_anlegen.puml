@@ -1,4 +1,6 @@
 @startuml
+title Kunde-Anlegen (Sequenzdiagramm)
+
 autonumber
 actor "Sales-Mitarbeiter" as Sales
 participant "Web-Interface (HTML/JS)" as View
