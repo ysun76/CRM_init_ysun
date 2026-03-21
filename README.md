@@ -27,7 +27,6 @@ Sämtliche Diagramme befinden sich im Ordner `docs/` und dokumentieren die Archi
 - **Use-Case-Diagramm**: ![Use Case](docs/use_case.png)
 - **Aktivitätsdiagramm (Login)**: ![Login Process](docs/activity_login_workflow.png)
 - **Aktivitätsdiagramm (Kunden)**: ![Kundenanlage](docs/activity_neue_kunden_anlegen.png)
-- **Aktivitätsdiagramm (Leads)**: ![Lead-Erfassung](docs/activity_neue_leads_anlegen.png)
 
 ### 2. Daten- & Interaktionsmodellierung
 - **Datenmodell (ERD)**: ![ERD](docs/erd.png)
