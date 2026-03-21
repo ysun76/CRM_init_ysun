@@ -1,38 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Add Lead</h1>
-
-<form method="POST">
-    <div class="form-group">
-        <label>Name:</label>
-        <input type="text" name="name" required>
-    </div>
+<div class="container mt-4">
+    <h1>Neuen Lead hinzufügen</h1>
+    <hr>
     
-    <div class="form-group">
-        <label>Email:</label>
-        <input type="email" name="email" required>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" action="{{ url_for('add_lead') }}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Vollständiger Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-Mail Adresse</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="company" class="form-label">Unternehmen</label>
+                    <input type="text" class="form-control" id="company" name="company" required>
+                </div>
+                <div class="mb-3">
+                    <label for="value" class="form-label">Erwarteter Wert (€)</label>
+                    <input type="number" step="0.01" class="form-control" id="value" name="value" required>
+                </div>
+                <div class="mb-3">
+                    <label for="source" class="form-label">Quelle (z.B. Website, Messe)</label>
+                    <input type="text" class="form-control" id="source" name="source">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Speichern</button>
+                <a href="{{ url_for('leads') }}" class="btn btn-secondary">Abbrechen</a>
+            </form>
+        </div>
     </div>
-    
-    <div class="form-group">
-        <label>Company:</label>
-        <input type="text" name="company" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Deal Value:</label>
-        <input type="number" name="value" step="0.01" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Source:</label>
-        <select name="source">
-            <option>Website</option>
-            <option>Email</option>
-            <option>Referral</option>
-        </select>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Add Lead</button>
-</form>
+</div>
 {% endblock %}

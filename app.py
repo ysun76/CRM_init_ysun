@@ -221,6 +221,38 @@ def delete_lead(lead_id):
     flash('Lead gelöscht!', 'success')
     return redirect(url_for('leads'))
 
+@app.route('/convert_lead/<int:lead_id>', methods=['POST'])
+@login_required
+def convert_lead(lead_id):
+    # Den zu konvertierenden Lead aus der Datenbank abrufen (德语注释)
+    lead = Lead.query.get_or_404(lead_id)
+    
+    try:
+        # Einen neuen Kunden auf Basis der Lead-Daten erstellen (德语注释)
+        # Wir nutzen getattr, falls das 'phone'-Attribut im Lead-Model fehlt
+        new_customer = Customer(
+            name=lead.name,
+            email=lead.email,
+            company=lead.company,
+            phone=getattr(lead, 'phone', 'Keine Angabe'), # Sicherer Zugriff 
+            status='active'  # Standardmäßig als aktiver Kunde anlegen
+        )
+        
+        # Den neuen Kunden hinzufügen und den alten Lead löschen 
+        db.session.add(new_customer)
+        db.session.delete(lead)
+        
+        # Änderungen in der Datenbank speichern 
+        db.session.commit()
+        
+        flash(f'Erfolg: {lead.name} wurde erfolgreich in einen Kunden umgewandelt!', 'success')
+    except Exception as e:
+        # Bei Fehlern die Transaktion zurückrollen 
+        db.session.rollback()
+        flash(f'Fehler bei der Konvertierung: {str(e)}', 'error')
+        
+    return redirect(url_for('customers'))
+
 # --- Error Handling ---
 @app.errorhandler(404)
 def page_not_found(error):
@@ -238,6 +270,11 @@ if __name__ == '__main__':
             admin.set_password('password123')
             db.session.add(admin)
             print("Admin account created: admin / password123")
+
+        if not User.query.filter_by(username='user1').first():
+            standard_user = User(username='user1', role='user') # Rolle ist 'user'
+            standard_user.set_password('user123')
+            db.session.add(standard_user)
             
         # 3. Load demo data if database is empty
         if not Customer.query.first():

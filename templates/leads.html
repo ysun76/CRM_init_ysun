@@ -3,26 +3,24 @@
 {% block content %}
 <h1>Leads-Verwaltung</h1>
 
+{% if session.get('role') == 'admin' %}
+    <a href="{{ url_for('add_lead') }}" class="btn btn-primary mb-3">+ Lead hinzufügen</a>
+{% endif %}
+
 <table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Unternehmen</th>
-            <th>Wert</th>
-            <th>Aktionen</th>
-        </tr>
-    </thead>
     <tbody>
-        {% for l in leads %} <tr>
+        {% for l in leads %}
+        <tr>
             <td>{{ l.name }}</td>
-            <td>{{ l.company }}</td>
-            <td>{{ l.value }} €</td>
             <td>
                 <a href="{{ url_for('lead_detail', lead_id=l.id) }}" class="btn btn-sm btn-info">View</a>
 
                 {% if session.get('role') == 'admin' %}
-                    <form method="POST" action="{{ url_for('delete_lead', lead_id=l.id) }}" style="display:inline">
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Lead löschen?')">Delete</button>
+                    <form action="{{ url_for('convert_lead', lead_id=l.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success">🎯 Konvertieren</button>
+                    </form>
+                    <form action="{{ url_for('delete_lead', lead_id=l.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Löschen</button>
                     </form>
                 {% endif %}
             </td>
@@ -30,4 +28,5 @@
         {% endfor %}
     </tbody>
 </table>
+
 {% endblock %}
