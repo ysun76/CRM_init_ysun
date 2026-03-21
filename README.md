@@ -1,32 +1,41 @@
-# 🚀 CRM-Vertriebssystem (Full Project Release)
+# CRM-Vertriebssystem - Projektberichterstattung (M4)
 
-## 📋 Projektübersicht
-Dieses CRM-System wurde über drei Sprints hinweg entwickelt, um den Vertriebsprozess von der ersten Lead-Erfassung bis zur aktiven Kundenverwaltung zu digitalisieren. Es bietet eine sichere, rollenbasierte Umgebung mit Datenvisualisierung und API-Unterstützung.
+## Projektbeschreibung
+Dieses CRM-System dient der digitalen Verwaltung von Kunden und Verkaufsinteressenten (Leads). Die Entwicklung erfolgte in vier Phasen (Sprint 0 bis Sprint 3) und deckt den gesamten Prozess von der Anforderungsanalyse bis hin zum Deployment und der API-Dokumentation ab.
+
+## Projektverlauf und Meilensteine
+
+| Sprint | Zeitraum | Fokus | Deliverables |
+| :--- | :--- | :--- | :--- |
+| **Sprint 0** | Woche 1 | Setup & Planning | Jira-Projekt eingerichtet, Erweiterung gewählt, GitHub Repo geklont |
+| **Sprint 1** | Woche 2 | Requirements & Design | Use-Case-Diagramm, Aktivitätsdiagramm, ERD, Sequenzdiagramm |
+| **Sprint 2** | Woche 3 | Implementierung Kern | Basisfunktionen lauffähig, Erweiterung begonnen, Authentifizierung |
+| **Sprint 3** | Woche 4 | Erweiterung & Finalisierung | Erweiterung fertig (RBAC, Dashboard), Testing, Dokumentation, Deployment |
+
+## Funktionsumfang
+- **Kundenverwaltung**: Vollständige CRUD-Operationen (Erstellen, Lesen, Aktualisieren, Löschen).
+- **Lead-Management**: Erfassung von Interessenten und automatisierte Konvertierung in Kunden.
+- **Dashboard**: Grafische Darstellung der Kundenstatus-Verteilung.
+- **Sicherheit (RBAC)**: Rollenbasierte Zugriffskontrolle zwischen Administratoren und Standard-Nutzern.
+- **API-Dokumentation**: Automatisierte Schnittstellenbeschreibung via Swagger/Flasgger.
+
+## Benutzerrollen für den Testbetrieb
+| Rolle | Benutzername | Passwort | Berechtigungen |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | admin | password123 | Voller Zugriff auf alle administrativen Funktionen |
+| **Standard-User** | user1 | user123 | Eingeschränkter Lesezugriff, Suche und Filterung |
+
+## Installation und Betrieb
+1. Installation der Abhängigkeiten: `pip install -r requirements.txt`
+2. Starten der Anwendung: `python app.py`
+3. Zugriff auf die API-Dokumentation: `http://127.0.0.1:5000/apidocs`
+
+## Dokumentation
+Alle technischen Diagramme (Use-Case, ERD etc.) sind als `.puml` und `.png` Dateien im Ordner `docs/` hinterlegt. Der aktuelle Status der Tasks ist im Jira-Board dokumentiert.
 
 ---
 
-## 🏗️ Projektentwicklung (Sprint-Historie)
-
-### 🔹 Sprint 1: Fundament & Basis-Funktionen
-- **Setup**: Flask-App mit SQLite-Datenbank-Anbindung.
-- **Basis-CRUD**: Erstellen, Lesen, Aktualisieren und Löschen von Kunden (Customers).
-- **Navigation**: Implementierung eines konsistenten Layouts mittels Jinja2-Templates (`base.html`).
-
-### 🔹 Sprint 2: Lead-Management & Business Logic
-- **Leads-Verwaltung**: Einführung einer separaten Tabelle für Verkaufsinteressenten.
-- **Benutzer-Authentifizierung**: Erstes Login-System für den Zugriffsschutz.
-- **Frontend-Styling**: Integration von Bootstrap 5 für ein responsives Design.
-
-### 🔹 Sprint 3: Analyse, Suche & Berechtigung (Aktuell)
-- **CIY-21 (Dashboard)**: Grafische Auswertung der Kundenstatus-Verteilung (Chart.js).
-- **CIY-22 (Suche/Filter)**: Dynamische Echtzeit-Suche für die Kundenliste.
-- **CIY-23 (Lead-Konvertierung)**: Komplexer Workflow zur Umwandlung von Leads in Kunden.
-- **CIY-24 (RBAC)**: Rollenbasierte Zugriffskontrolle (Admin vs. User).
-- **CIY-25 (API-Dokumentation)**: Automatisierte Swagger-UI Integration.
-
----
-
-## 🔐 Benutzerrollen & Test-Accounts
+##  Benutzerrollen & Test-Accounts
 | Rolle | Benutzername | Passwort | Beschreibung |
 | :--- | :--- | :--- | :--- |
 | **Administrator** | `admin` | `password123` | Darf alles: CRUD, Löschen, Konvertieren. |
@@ -34,7 +43,7 @@ Dieses CRM-System wurde über drei Sprints hinweg entwickelt, um den Vertriebspr
 
 ---
 
-## 🛠️ Technische Installation
+##  Technische Installation
 1. **Requirements**: `pip install -r requirements.txt`
 2. **Datenbank**: Wird beim ersten Start automatisch initialisiert.
 3. **Start**: `python app.py`
@@ -42,9 +51,9 @@ Dieses CRM-System wurde über drei Sprints hinweg entwickelt, um den Vertriebspr
 
 ---
 
-## 📊 UML-Dokumentation
+##  UML-Dokumentation
 Sämtliche Diagramme befinden sich im Ordner `/docs`:
-- **Use Case Diagramm**: `docs/usecase.png` (Zeigt Rollen und Kernprozesse).
+- **Use Case Diagramm**: `docs/use_case.png` (Zeigt Rollen und Kernprozesse).
 - **Jira-Dokumentation**: Der Projektfortschritt wurde vollständig in Jira dokumentiert (Status: Alle Tickets erledigt).
 
 ---
