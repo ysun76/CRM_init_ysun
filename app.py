@@ -57,12 +57,25 @@ def logout():
     flash('Erfolgreich abgemeldet.', 'info')
     return redirect(url_for('login'))
 
-# --- Main Routes ---
 @app.route('/')
+@login_required
 def index():
-    total_customers = len(Customer.get_all_customers())
-    total_leads = len(Lead.get_all_leads())
-    return render_template('index.html', total_customers=total_customers, total_leads=total_leads)
+    # Basis-Statistiken abrufen
+    total_customers = Customer.query.count()
+    total_leads = Lead.query.count()
+    
+    # --- Sprint 3: Statistiken für das Dashboard-Diagramm ---
+    # Anzahl der aktiven Kunden ermitteln 
+    active_count = Customer.query.filter_by(status='active').count()
+    # Anzahl der Interessenten (Prospects) ermitteln 
+    prospect_count = Customer.query.filter_by(status='prospect').count()
+    
+    # Daten an das Frontend-Template übergeben
+    return render_template('index.html', 
+                           total_customers=total_customers, 
+                           total_leads=total_leads,
+                           active_count=active_count,
+                           prospect_count=prospect_count)
 
 # --- Customer Management Routes ---
 @app.route('/customers')

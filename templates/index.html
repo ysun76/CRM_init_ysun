@@ -8,8 +8,53 @@
     <p style="margin-bottom: 0;">Total Leads: <strong>{{ total_leads }}</strong></p>
 </div>
 
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-light text-center">
+                <h5 class="mb-0">Kundenstatus Verteilung</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="customerPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div style="margin-top: 2rem;">
     <a href="{{ url_for('customers') }}" class="btn btn-primary" style="margin-right: 1rem;">View Customers</a>
     <a href="{{ url_for('leads') }}" class="btn btn-primary">View Leads</a>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Initialisierung des Diagramms nach dem Laden der Seite
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeData = {{ active_count }};
+        const prospectData = {{ prospect_count }};
+
+        const ctx = document.getElementById('customerPieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie', // Diagrammtyp definieren
+            data: {
+                labels: ['Aktiv', 'Interessent (Prospect)'],
+                datasets: [{
+                    data: [activeData, prospectData],
+                    backgroundColor: ['#28a745', '#ffc107'], // Farben: Grün für Aktiv, Gelb für Prospect
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom' // Legende unter dem Chart platzieren
+                    }
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
+
