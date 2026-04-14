@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from models import db, User, Customer, Lead
 from functools import wraps
 from flasgger import Swagger
+import os
 
 app = Flask(__name__)
 
 # --- Configuration ---
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///crm.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'ihr-geheimschlüssel-hier'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ihr-geheimschlüssel-hier')
 
 # Initialize Database and Swagger
 db.init_app(app)
